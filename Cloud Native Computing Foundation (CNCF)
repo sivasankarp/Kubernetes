@@ -1,0 +1,27 @@
+CNCF hosts a multitude of projects, with more to be added in the future. CNCF provides resources to each of the projects, but, at the same time, each project continues to operate independently under its pre-existing governance structure and with its existing maintainers. Projects within CNCF are categorized based on their maturity levels: Sandbox, Incubating, and Graduated. At the time of this writing, over a dozen projects had reached Graduated status with many more Incubating and in the Sandbox.
+
+- Popular graduated projects:
+Kubernetes container orchestrator
+etcd distributed key-value store
+CoreDNS DNS server
+containerd container runtime
+Envoy cloud native proxy
+Fluentd for unified logging
+Harbor registry
+Helm package management for Kubernetes
+Linkerd service mesh for Kubernetes
+Open Policy Agent policy engine
+Prometheus monitoring system and time series DB
+Rook cloud native storage orchestrator for Kubernetes
+
+- Key incubating projects:
+argo workflow engine for Kubernetes
+Buildpacks.io builds application images
+CRI-O container runtime
+Contour ingress controller for Kubernetes
+gRPC for remote procedure call (RPC)
+CNI for Linux containers networking
+flux continuous delivery for Kubernetes
+Knative serverless containers in Kubernetes
+KubeVirt Kubernetes based Virtual Machine manager
+Notary for data security
