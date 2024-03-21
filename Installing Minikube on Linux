@@ -1,0 +1,75 @@
+install the latest Minikube release on Ubuntu Linux 20.04 LTS with VirtualBox v7.0 specifically. This installation assumes no other isolation software is installed on our Linux workstation, such as KVM2, QEMU, Docker Engine or Podman, that Minikube can use as a driver.
+
+NOTE: For other Linux OS distributions or releases, VirtualBox and Minikube versions, the installation steps may vary! Check the Minikube installation!
+
+Verify the virtualization support on your Linux OS in a terminal (a non-empty output indicates supported virtualization):
+
+$ grep -E --color 'vmx|svm' /proc/cpuinfo
+
+The easiest way to download and install the VirtualBox hypervisor for Linux is from its official download site. However, if feeling adventurous, in a terminal run the following commands to add the recommended source repository for the host OS, download and register the public key, update and install:
+
+$ sudo bash -c 'echo "deb \
+  [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] \
+  https://download.virtualbox.org/virtualbox/debian \
+  eoan contrib" >> /etc/apt/sources.list'
+
+$ wget -O- \
+  https://www.virtualbox.org/download/oracle_vbox_2016.asc | \
+  sudo gpg --dearmor --yes \
+  --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
+
+$ sudo apt update
+
+$ sudo apt install -y virtualbox-7.0
+
+Minikube can be downloaded and installed, in a terminal, the latest release or a specific release from the Minikube release page:
+
+$ curl -LO \
+  https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+
+$ sudo dpkg -i minikube_latest_amd64.deb
+
+NOTE: Replacing /latest/ with a particular version, such as /v1.27.1/ will download that specified Minikube version.
+
+Start Minikube. In a terminal we can start Minikube with the minikube start command, which bootstraps a single-node cluster with the latest stable Kubernetes version release. For a specific Kubernetes version the --kubernetes-version option can be used as such minikube start --kubernetes-version v1.25.1 (where latest is default and acceptable version value, and stable is also acceptable). More advanced start options will be explored later in this chapter:
+
+$ minikube start
+
+😄  minikube v1.28.0 on Ubuntu 20.04
+✨  Automatically selected the virtualbox driver. Other choices: none, ssh
+💿  Downloading VM boot image ...
+    > minikube-v1.28.0-amd64.iso....: 65 B / 65 B [----------] 100.00% ? p/s 0s
+    > minikube-v1.28.0-amd64.iso: 274.45 MiB / 274.45 MiB  100.00% 32.75 MiB p/
+👍  Starting control plane node minikube in cluster minikube
+💾  Downloading Kubernetes v1.25.3 preload ...
+    > preloaded-images-k8s-v18-v1...: 385.44 MiB / 385.44 MiB  100.00% 38.52 MiB
+🔥  Creating virtualbox VM (CPUs=2, Memory=6000MB, Disk=20000MB) ...
+🐳  Preparing Kubernetes v1.25.3 on Docker 20.10.20 ...
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+🔎  Verifying Kubernetes components...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🌟  Enabled addons: default-storageclass, storage-provisioner
+💡  kubectl not found. If you need it, try: 'minikube kubectl -- get pods -A'
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+
+NOTE: An error message that reads "Unable to pick a default driver..." means that Minikube was not able to locate any one of the supported hypervisors or runtimes. The recommendation is to install or re-install a desired isolation tool, and ensure its executable is found in the default PATH of your OS distribution. 
+
+Check the status. With the minikube status command, we display the status of the Minikube cluster:
+
+$ minikube status
+
+minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+
+Stop Minikube. With the minikube stop command, we can stop Minikube:
+
+$ minikube stop
+
+✋  Stopping node "minikube"  ...
+🛑  1 node stopped.
